@@ -45,6 +45,7 @@ src/
 ## 🤖 AI Chatbot
 
 The About page features an interactive AI chatbot that:
+
 - Provides information about my background and skills
 - Answers questions about my projects and experience
 - Maintains conversation context
