@@ -1,69 +1,75 @@
-# React + TypeScript + Vite
+# chairulridjal.xyz
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+My personal website built with modern web technologies and a sleek terminal-inspired design.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Modern Tech Stack**: React 19, Vite 7, TypeScript, Tailwind CSS v4
+- **Terminal Aesthetic**: Dark theme with green accents inspired by terminal interfaces
+- **Interactive Chatbot**: AI-powered chatbot on the About page for engaging user interaction
+- **Responsive Design**: Fully responsive across all devices
+- **Smooth Navigation**: React Router with seamless page transitions
+- **Modular Architecture**: Well-organized component structure
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Frontend**: React, TypeScript, Tailwind CSS
+- **Build Tool**: Vite
+- **Routing**: React Router
+- **Styling**: Tailwind CSS v4 with custom terminal theme
+- **Font**: Plus Jakarta Sans
+- **Deployment**: Ready for Vercel/Netlify
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 📁 Project Structure
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+src/
+├── components/
+│   ├── layout/          # Layout components (Header, Navigation)
+│   ├── ui/              # Reusable UI components
+│   ├── chatbot/         # AI chatbot component
+│   └── index.ts         # Component exports
+├── pages/               # Page components (Home, About, Blog, Projects, Resume)
+├── assets/              # Static assets
+└── main.tsx            # Application entry point
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🎨 Design Features
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **Terminal Theme**: Dark backgrounds with terminal-green (#00FF41) accents
+- **Consistent UI**: Rounded corners, smooth transitions, and cohesive styling
+- **Typography**: Plus Jakarta Sans for headers, clean and modern
+- **Interactive Elements**: Hover effects and smooth animations
+- **Mobile-First**: Responsive design that works on all screen sizes
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🤖 AI Chatbot
+
+The About page features an interactive AI chatbot that:
+- Provides information about my background and skills
+- Answers questions about my projects and experience
+- Maintains conversation context
+- Features a terminal-style interface with avatars
+
+## 🚀 Quick Start
+
+```bash
+# Clone the repository
+git clone https://github.com/chairulridjaal/chairulridjal.xyz.git
+
+# Navigate to project directory
+cd chairulridjal.xyz
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
 ```
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🌐 Live Demo
+
+Visit the live website: [chairulridjal.xyz](https://chairulridjal.xyz)
