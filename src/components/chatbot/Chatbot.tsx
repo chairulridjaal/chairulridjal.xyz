@@ -112,7 +112,7 @@ const Chatbot: React.FC = () => {
               // Bot message - left aligned with terminal prompt style
               <div className="flex items-start space-x-2">
                 <img 
-                  src="src/assets/images/Avatar.png" 
+                  src="/assets/images/Avatar.png" 
                   alt="AI Avatar" 
                   className="w-8 h-8 rounded-full border border-foreground-800 flex-shrink-0"
                 />
@@ -130,7 +130,7 @@ const Chatbot: React.FC = () => {
         {isLoading && (
           <div className="flex items-center space-x-2">
             <img 
-              src="src\assets\images\Avatar.png" 
+              src="/assets/images/Avatar.png" 
               alt="AI Avatar" 
               className="w-8 h-8 rounded-full border border-foreground-800 flex-shrink-0"
             />

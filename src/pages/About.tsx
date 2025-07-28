@@ -27,9 +27,14 @@ const About: React.FC = () => {
           <div className="text-center mb-12">
             <div className="relative inline-block mb-6 group">
               <img
-                src="src\assets\images\Avatar.png"
+                src="/assets/images/Avatar.png"
                 alt="Chairulridjal"
-                className="w-28 h-28 rounded-full border-2 border-terminal-green mx-auto shadow-lg shadow-terminal-green/20 group-hover:shadow-terminal-green/40 group-hover:scale-105 transition-all duration-300"
+                className="w-28 h-28 rounded-full border-2 border-terminal-green mx-auto shadow-lg shadow-terminal-green/20 group-hover:shadow-terminal-green/40 group-hover:scale-105 transition-all duration-300 group-hover:opacity-0"
+              />
+              <img
+                src="/assets/images/Avatar-2.png"
+                alt="Chairulridjal"
+                className="w-28 h-28 rounded-full border-2 border-terminal-green mx-auto shadow-lg shadow-terminal-green/20 group-hover:shadow-terminal-green/40 group-hover:scale-105 transition-all duration-300 absolute top-0 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100"
               />
               <div className="absolute -bottom-1 -right-0 w-6 h-6 bg-terminal-green rounded-full border-2 border-dark-black group-hover:shadow-terminal-green/50 group-hover:shadow-lg transition-shadow duration-300"></div>
             </div>

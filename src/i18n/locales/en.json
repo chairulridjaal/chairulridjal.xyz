@@ -72,7 +72,7 @@
   "chatbot": {
     "title": "ask-me.js",
     "placeholder": "What would you like to know?",
-    "greeting": "Hello! I'm Chairulridjal's AI assistant. Ask me anything about his work, skills, or projects!"
+    "greeting": "Hello! I'm Chairulridjal's AI form. Ask me anything about my work, skills, or projects!"
   },
   "spotify": {
     "title": "spotify.js",

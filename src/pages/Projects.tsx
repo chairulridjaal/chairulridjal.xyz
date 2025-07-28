@@ -12,7 +12,7 @@ const Projects: React.FC = () => {
       id: 1,
       title: 'Personal Website',
       description: 'A modern personal website built with React, TypeScript, and Tailwind CSS. Features AI chatbot integration, Spotify API, and multilingual support.',
-      image: 'src/assets/images/HerdSphere Logo_ Livestock Management Solution.png',
+      image: '/assets/images/HerdSphere Logo_ Livestock Management Solution.png',
       technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'OpenRouter AI'],
       github: '#',
       demo: '#',
