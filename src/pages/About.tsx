@@ -20,7 +20,7 @@ const About: React.FC = () => {
 
   return (
     <Layout>
-      <div className="min-h-screen px-4 sm:px-6 lg:px-8 py-12">
+      <div className="min-h-screen px-4 sm:px-6 lg:px-8 py-12 about-content">
         <div className="max-w-7xl mx-auto">
           
           {/* Hero Section */}

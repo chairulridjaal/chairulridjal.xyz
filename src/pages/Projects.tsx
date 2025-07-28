@@ -42,7 +42,7 @@ const Projects: React.FC = () => {
 
   return (
     <Layout>
-      <div className="min-h-screen px-4 sm:px-6 lg:px-8 py-12">
+      <div className="min-h-screen px-4 sm:px-6 lg:px-8 py-12 projects-content">
         <div className="max-w-7xl mx-auto">
           
           {/* Hero Section */}

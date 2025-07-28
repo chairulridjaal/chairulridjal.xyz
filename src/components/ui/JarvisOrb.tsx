@@ -30,6 +30,8 @@ const JarvisOrb: React.FC = () => {
   const rotationRef = useRef({ x: 0, y: 0, z: 0 });
   const electronsRef = useRef<Electron[]>([]);
   const [isHovered, setIsHovered] = useState(false);
+  const [pulse, setPulse] = useState(1);
+  const [sparkles, setSparkles] = useState<{x:number,y:number,alpha:number,life:number}[]>([]);
 
   // Create icosphere vertices for 3D effect
   const createIcosphere = (): Vertex[] => {
@@ -160,6 +162,15 @@ const JarvisOrb: React.FC = () => {
       const centerY = canvas.offsetHeight / 2;
       const time = Date.now() * 0.001;
 
+      // Pulse value for scale and glow
+      const pulseValue = 1 + Math.sin(time * 2) * 0.08;
+      setPulse(pulseValue);
+
+      // Gentle floating movement for nucleus
+      const floatX = Math.sin(time * 0.7) * 18;
+      const floatY = Math.cos(time * 0.9) * 14;
+      const floatZ = Math.sin(time * 0.5) * 10;
+
       // Auto rotation
       rotationRef.current.y += 0.008;
       rotationRef.current.x += 0.004;
@@ -172,46 +183,67 @@ const JarvisOrb: React.FC = () => {
         rotationRef.current.y += mouseInfluenceX * 0.1;
       }
 
+      // Draw energy field glow
+      const fieldPulse = 1 + Math.sin(time * 2.5) * 0.12;
+      ctx.save();
+      ctx.globalAlpha = 0.18 + 0.08 * Math.abs(Math.sin(time * 3));
+      const fieldGradient = ctx.createRadialGradient(centerX + floatX, centerY + floatY, 0, centerX + floatX, centerY + floatY, 180 * fieldPulse);
+      fieldGradient.addColorStop(0, 'rgba(34,197,94,0.2)');
+      fieldGradient.addColorStop(0.5, 'rgba(0,255,255,0.08)');
+      fieldGradient.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.beginPath();
+      ctx.arc(centerX + floatX, centerY + floatY, 180 * fieldPulse, 0, Math.PI * 2);
+      ctx.fillStyle = fieldGradient;
+      ctx.fill();
+      ctx.restore();
+
       // Draw electron orbits first (behind the nucleus)
-      electronsRef.current.forEach(electron => {
+      electronsRef.current.forEach((electron, idx) => {
         // Update electron position
         electron.angle += electron.speed;
+
+        // Animate orbit tilt and rotation for 3D movement
+        const dynamicTilt = electron.orbitTilt + Math.sin(time * 0.7 + idx) * 0.5;
+        const dynamicRotation = electron.orbitRotation + Math.cos(time * 0.5 + idx) * 0.5;
 
         // Calculate 3D orbital position
         const orbitalX = Math.cos(electron.angle) * electron.radius;
         const orbitalZ = Math.sin(electron.angle) * electron.radius;
-        const orbitalY = 0;
+        const orbitalY = Math.sin(electron.angle * 1.2 + idx) * 18; // vertical movement
 
-        // Apply orbital tilt and rotation
-        let x = orbitalX * Math.cos(electron.orbitRotation) - orbitalZ * Math.sin(electron.orbitRotation);
-        let z = orbitalX * Math.sin(electron.orbitRotation) + orbitalZ * Math.cos(electron.orbitRotation);
-        let y = orbitalY * Math.cos(electron.orbitTilt) - z * Math.sin(electron.orbitTilt);
-        z = orbitalY * Math.sin(electron.orbitTilt) + z * Math.cos(electron.orbitTilt);
+        // Apply dynamic tilt and rotation
+        let x = orbitalX * Math.cos(dynamicRotation) - orbitalZ * Math.sin(dynamicRotation);
+        let z = orbitalX * Math.sin(dynamicRotation) + orbitalZ * Math.cos(dynamicRotation);
+        let y = orbitalY * Math.cos(dynamicTilt) - z * Math.sin(dynamicTilt);
+        z = orbitalY * Math.sin(dynamicTilt) + z * Math.cos(dynamicTilt);
 
-        // Project to 2D
+        // Project to 2D (add nucleus floating)
         const distance = 500;
-        const perspective = distance / (distance - z);
-        const projectedX = centerX + x * perspective;
-        const projectedY = centerY + y * perspective;
+        const perspective = distance / (distance - (z + floatZ));
+        const projectedX = centerX + (x + floatX) * perspective;
+        const projectedY = centerY + (y + floatY) * perspective;
 
-        // Draw electron trail
+        // Draw electron trail with hue shift
         const trailLength = 8;
         for (let i = 0; i < trailLength; i++) {
           const trailAngle = electron.angle - (i * 0.1);
           const trailX = Math.cos(trailAngle) * electron.radius;
           const trailZ = Math.sin(trailAngle) * electron.radius;
-          
-          let tx = trailX * Math.cos(electron.orbitRotation) - trailZ * Math.sin(electron.orbitRotation);
-          let tz = trailX * Math.sin(electron.orbitRotation) + trailZ * Math.cos(electron.orbitRotation);
-          let ty = 0 * Math.cos(electron.orbitTilt) - tz * Math.sin(electron.orbitTilt);
-          tz = 0 * Math.sin(electron.orbitTilt) + tz * Math.cos(electron.orbitTilt);
+          const trailY = Math.sin(trailAngle * 1.2 + idx) * 18;
 
-          const trailPerspective = distance / (distance - tz);
-          const trailProjX = centerX + tx * trailPerspective;
-          const trailProjY = centerY + ty * trailPerspective;
+          let tx = trailX * Math.cos(dynamicRotation) - trailZ * Math.sin(dynamicRotation);
+          let tz = trailX * Math.sin(dynamicRotation) + trailZ * Math.cos(dynamicRotation);
+          let ty = trailY * Math.cos(dynamicTilt) - tz * Math.sin(dynamicTilt);
+          tz = trailY * Math.sin(dynamicTilt) + tz * Math.cos(dynamicTilt);
 
-          const alpha = (1 - i / trailLength) * 0.3;
-          ctx.fillStyle = `rgba(34, 197, 94, ${alpha})`;
+          const trailPerspective = distance / (distance - (tz + floatZ));
+          const trailProjX = centerX + (tx + floatX) * trailPerspective;
+          const trailProjY = centerY + (ty + floatY) * trailPerspective;
+
+          // Colorful trail
+          const hue = (time * 60 + idx * 40 + i * 20) % 360;
+          const alpha = (1 - i / trailLength) * 0.32;
+          ctx.fillStyle = `hsla(${hue}, 80%, 60%, ${alpha})`;
           ctx.beginPath();
           ctx.arc(trailProjX, trailProjY, electron.size * (1 - i / trailLength), 0, Math.PI * 2);
           ctx.fill();
@@ -233,22 +265,22 @@ const JarvisOrb: React.FC = () => {
 
         // Draw orbital paths when hovered
         if (isHovered) {
-          ctx.strokeStyle = 'rgba(34, 197, 94, 0.1)';
+          ctx.strokeStyle = `hsla(${(time * 60 + idx * 40) % 360}, 80%, 60%, 0.18)`;
           ctx.lineWidth = 1;
           ctx.beginPath();
-          
           for (let angle = 0; angle < Math.PI * 2; angle += 0.1) {
             const pathX = Math.cos(angle) * electron.radius;
             const pathZ = Math.sin(angle) * electron.radius;
-            
-            let px = pathX * Math.cos(electron.orbitRotation) - pathZ * Math.sin(electron.orbitRotation);
-            let pz = pathX * Math.sin(electron.orbitRotation) + pathZ * Math.cos(electron.orbitRotation);
-            let py = 0 * Math.cos(electron.orbitTilt) - pz * Math.sin(electron.orbitTilt);
-            pz = 0 * Math.sin(electron.orbitTilt) + pz * Math.cos(electron.orbitTilt);
+            const pathY = Math.sin(angle * 1.2 + idx) * 18;
 
-            const pathPerspective = distance / (distance - pz);
-            const pathProjX = centerX + px * pathPerspective;
-            const pathProjY = centerY + py * pathPerspective;
+            let px = pathX * Math.cos(dynamicRotation) - pathZ * Math.sin(dynamicRotation);
+            let pz = pathX * Math.sin(dynamicRotation) + pathZ * Math.cos(dynamicRotation);
+            let py = pathY * Math.cos(dynamicTilt) - pz * Math.sin(dynamicTilt);
+            pz = pathY * Math.sin(dynamicTilt) + pz * Math.cos(dynamicTilt);
+
+            const pathPerspective = distance / (distance - (pz + floatZ));
+            const pathProjX = centerX + (px + floatX) * pathPerspective;
+            const pathProjY = centerY + (py + floatY) * pathPerspective;
 
             if (angle === 0) {
               ctx.moveTo(pathProjX, pathProjY);
@@ -258,6 +290,29 @@ const JarvisOrb: React.FC = () => {
           }
           ctx.stroke();
         }
+      });
+
+      // Sparkle logic
+      if (Math.random() < 0.08) {
+        // Add a sparkle near the nucleus
+        const angle = Math.random() * Math.PI * 2;
+        const radius = 40 + Math.random() * 30;
+        const sx = centerX + floatX + Math.cos(angle) * radius;
+        const sy = centerY + floatY + Math.sin(angle) * radius;
+        setSparkles(prev => [...prev, {x:sx, y:sy, alpha:1, life:0}].slice(-30));
+      }
+      // Draw and update sparkles
+      setSparkles(prev => prev.map(s => ({...s, life: s.life + 1, alpha: Math.max(0, 1 - s.life/30)})).filter(s => s.alpha > 0.05));
+      sparkles.forEach(sparkle => {
+        ctx.save();
+        ctx.globalAlpha = sparkle.alpha;
+        ctx.beginPath();
+        ctx.arc(sparkle.x, sparkle.y, 2.5 + Math.sin(time * 8 + sparkle.life) * 1.2, 0, Math.PI * 2);
+        ctx.fillStyle = `hsla(${(time * 120 + sparkle.life * 12) % 360}, 90%, 70%, 1)`;
+        ctx.shadowColor = ctx.fillStyle;
+        ctx.shadowBlur = 8;
+        ctx.fill();
+        ctx.restore();
       });
 
       // Create working copy of vertices for this frame (nucleus)
@@ -273,8 +328,9 @@ const JarvisOrb: React.FC = () => {
 
       // Project and draw vertices (nucleus)
       frameVertices.forEach(vertex => {
-        const scale = 100 + Math.sin(time * 1.5) * 10; // Pulsing effect
-        project3D(vertex, centerX, centerY, scale);
+        // Nucleus floats in 3D
+        const scale = (100 + Math.sin(time * 1.5) * 10) * pulseValue;
+        project3D(vertex, centerX + floatX, centerY + floatY, scale);
 
         // Calculate alpha based on z-depth
         const depth = (vertex.z + 1) / 2; // Normalize to 0-1
@@ -324,15 +380,22 @@ const JarvisOrb: React.FC = () => {
       }
 
       // Enhanced central core glow
-      const coreGradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, 40);
-      coreGradient.addColorStop(0, `rgba(34, 197, 94, ${isHovered ? 0.9 : 0.6})`);
-      coreGradient.addColorStop(0.3, `rgba(34, 197, 94, ${isHovered ? 0.5 : 0.3})`);
+      // Enhanced central core glow with flare
+      const flare = 1 + Math.abs(Math.sin(time * 3.5)) * 0.5;
+      const coreGradient = ctx.createRadialGradient(centerX + floatX, centerY + floatY, 0, centerX + floatX, centerY + floatY, 40 * pulseValue * flare);
+      coreGradient.addColorStop(0, `rgba(34, 197, 94, ${isHovered ? 0.95 : 0.7 + 0.2 * Math.abs(Math.sin(time * 2))})`);
+      coreGradient.addColorStop(0.3, `rgba(0,255,255,${isHovered ? 0.5 : 0.3 + 0.2 * Math.abs(Math.sin(time * 2))})`);
       coreGradient.addColorStop(1, 'rgba(34, 197, 94, 0)');
 
-      ctx.fillStyle = coreGradient;
+      ctx.save();
+      ctx.globalAlpha = 1;
       ctx.beginPath();
-      ctx.arc(centerX, centerY, 40, 0, Math.PI * 2);
+      ctx.arc(centerX + floatX, centerY + floatY, 40 * pulseValue * flare, 0, Math.PI * 2);
+      ctx.fillStyle = coreGradient;
+      ctx.shadowColor = 'rgba(34,197,94,0.7)';
+      ctx.shadowBlur = 18 * flare;
       ctx.fill();
+      ctx.restore();
 
       animationFrameRef.current = requestAnimationFrame(animate);
     };
