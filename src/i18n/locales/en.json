@@ -1,0 +1,95 @@
+{
+  "nav": {
+    "home": "index.js",
+    "about": "about.md",
+    "projects": "projects.py",
+    "blog": "blog.sh",
+    "resume": "resume.pdf"
+  },
+  "hero": {
+    "greeting": "Hello, I'm",
+    "name": "Chairulridjal",
+    "title": "Full-Stack Developer & AI Enthusiast",
+    "description": "I create innovative digital solutions with modern web technologies. Passionate about building applications that make a real difference in people's lives.",
+    "cta": "Get in touch"
+  },
+  "about": {
+    "title": "About Me",
+    "name": "Mochamad Chairulridjal",
+    "role": "Full-Stack Developer & AI Enthusiast",
+    "description": "I create innovative digital solutions with modern web technologies. Passionate about building applications that make a real difference in people's lives.",
+    "skills": {
+      "title": "Technical Skills",
+      "frontend": "Frontend",
+      "backend": "Backend & AI"
+    },
+    "experience": {
+      "title": "Experience",
+      "fullstack": {
+        "title": "Full-Stack Developer",
+        "period": "2023 - Present",
+        "description": "Building modern web applications with React, TypeScript, and Node.js. Focus on creating scalable, user-friendly solutions."
+      },
+      "ai": {
+        "title": "AI/ML Enthusiast",
+        "period": "2022 - Present", 
+        "description": "Exploring artificial intelligence and machine learning technologies. Working on innovative projects in AI-driven development."
+      }
+    },
+    "stats": {
+      "experience": "Years Experience",
+      "projects": "Projects Built",
+      "learning": "Always Learning"
+    }
+  },
+  "projects": {
+    "title": "My Projects",
+    "subtitle": "Here are some of the projects I've been working on",
+    "viewProject": "View Project",
+    "viewCode": "View Code",
+    "liveDemo": "Live Demo"
+  },
+  "blog": {
+    "title": "Blog Posts",
+    "subtitle": "Thoughts on technology, development, and innovation",
+    "readMore": "Read More",
+    "publishedOn": "Published on"
+  },
+  "contact": {
+    "title": "Get In Touch",
+    "subtitle": "Let's work together on something amazing",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "subject": "Subject",
+      "message": "Message",
+      "send": "Send Message",
+      "sending": "Sending...",
+      "success": "Message sent successfully!",
+      "error": "Failed to send message. Please try again."
+    }
+  },
+  "chatbot": {
+    "title": "ask-me.js",
+    "placeholder": "What would you like to know?",
+    "greeting": "Hello! I'm Chairulridjal's AI assistant. Ask me anything about his work, skills, or projects!"
+  },
+  "spotify": {
+    "title": "spotify.js",
+    "nowPlaying": "Now Playing",
+    "recentlyPlayed": "Recently Played",
+    "notPlaying": "Not currently playing"
+  },
+  "terminal": {
+    "title": "bash",
+    "copy": "copy"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "retry": "Retry",
+    "close": "Close",
+    "menu": "Menu",
+    "darkMode": "Dark Mode"
+  }
+}

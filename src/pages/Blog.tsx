@@ -39,19 +39,19 @@ const Blog: React.FC = () => {
           
           <div className="space-y-8">
             {blogPosts.map((post) => (
-              <div key={post.id} className="bg-dark-gray rounded-2xl border border-gray-700 p-8 hover:border-green-400 transition-colors">
+              <div key={post.id} className="bg-dark-gray rounded-2xl border border-foreground-800 p-8 hover:border-terminal-green/50 transition-all duration-300 group shadow-lg hover:shadow-terminal-green/20">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                  <h2 className="text-2xl font-semibold text-white mb-2 md:mb-0 font-family-jakarta">
+                  <h2 className="text-2xl font-semibold text-white mb-2 md:mb-0 font-family-jakarta group-hover:text-terminal-green/90 transition-colors">
                     {post.title}
                   </h2>
-                  <div className="flex items-center space-x-4 text-gray-400 text-sm">
+                  <div className="flex items-center space-x-4 text-gray-400 text-sm group-hover:text-gray-300 transition-colors">
                     <span>{post.date}</span>
                     <span>•</span>
                     <span>{post.readTime}</span>
                   </div>
                 </div>
                 
-                <p className="text-gray-300 mb-6 leading-relaxed">
+                <p className="text-gray-300 mb-6 leading-relaxed group-hover:text-gray-200 transition-colors">
                   {post.excerpt}
                 </p>
                 
@@ -59,33 +59,33 @@ const Blog: React.FC = () => {
                   {post.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="bg-green-900 text-terminal-green px-3 py-1 rounded-full text-sm font-medium border border-green-600"
+                      className="bg-terminal-green/10 text-terminal-green px-3 py-1 rounded-full text-sm font-medium border border-terminal-green/30 group-hover:bg-terminal-green/20 group-hover:shadow-terminal-green/30 group-hover:shadow-sm transition-all"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
                 
-                <button className="bg-gray-700 text-white px-6 py-3 rounded-lg hover:bg-gray-600 transition-colors border border-gray-600 font-family-jakarta">
+                <button className="bg-gray-700/50 text-white px-6 py-3 rounded-lg hover:bg-terminal-green/20 hover:text-terminal-green hover:border-terminal-green/50 transition-all duration-200 border border-gray-600 font-family-jakarta">
                   Read Article →
                 </button>
               </div>
             ))}
             
             <div className="text-center mt-16">
-              <div className="bg-dark-gray rounded-2xl border border-gray-700 p-12">
-                <h2 className="text-2xl font-semibold text-white mb-4 font-family-jakarta">
+              <div className="bg-dark-gray rounded-2xl border border-foreground-800 p-12 hover:border-terminal-green/50 transition-all duration-300 group shadow-lg hover:shadow-terminal-green/20">
+                <h2 className="text-2xl font-semibold text-white mb-4 font-family-jakarta group-hover:text-terminal-green/90 transition-colors">
                   More Posts Coming Soon!
                 </h2>
-                <p className="text-gray-300 mb-8">
+                <p className="text-gray-300 mb-8 group-hover:text-gray-200 transition-colors">
                   I'm working on more content about climate tech, web development, and AI. 
                   Stay tuned for updates!
                 </p>
                 <div className="flex justify-center space-x-4">
-                  <button className="bg-green-700 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition-colors border border-green-600 font-family-jakarta">
+                  <button className="bg-terminal-green/10 text-terminal-green px-6 py-3 rounded-lg hover:bg-terminal-green/20 hover:shadow-terminal-green/30 hover:shadow-sm transition-all duration-200 border border-terminal-green/30 font-family-jakarta">
                     Subscribe to Updates
                   </button>
-                  <button className="bg-gray-700 text-white px-6 py-3 rounded-lg hover:bg-gray-600 transition-colors border border-gray-600 font-family-jakarta">
+                  <button className="bg-gray-700/50 text-white px-6 py-3 rounded-lg hover:bg-terminal-green/20 hover:text-terminal-green hover:border-terminal-green/50 transition-all duration-200 border border-gray-600 font-family-jakarta">
                     RSS Feed
                   </button>
                 </div>

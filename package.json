@@ -7,11 +7,15 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "spotify-setup": "node scripts/spotify-setup.js"
   },
   "dependencies": {
+    "i18next": "^25.3.2",
+    "i18next-browser-languagedetector": "^8.2.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-i18next": "^15.6.1",
     "react-router-dom": "^7.7.1"
   },
   "devDependencies": {

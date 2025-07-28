@@ -17,11 +17,11 @@ const Terminal: React.FC<TerminalProps> = ({
   className = "" 
 }) => {
   return (
-    <div className={`terminal-window w-full max-w-3xl ${className}`}>
+    <div className={`terminal-window w-full max-w-3xl hover:shadow-terminal-green/20 hover:border-terminal-green/50 transition-all duration-300 group ${className}`}>
       {/* Terminal header */}
       <div className="terminal-header">
-        <div className="terminal-title">{title}</div>
-        <button className="terminal-button">copy</button>
+        <div className="terminal-title group-hover:text-terminal-green/90 transition-colors">{title}</div>
+        <button className="terminal-button group-hover:text-terminal-green/80 transition-colors">copy</button>
       </div>
 
       {/* Terminal content */}

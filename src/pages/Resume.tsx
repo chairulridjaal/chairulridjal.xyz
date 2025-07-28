@@ -61,8 +61,8 @@ const Resume: React.FC = () => {
             <div className="lg:col-span-2 space-y-8">
               
               {/* Experience Section */}
-              <div className="bg-dark-gray rounded-2xl border border-gray-700 p-8">
-                <h2 className="text-2xl font-bold text-white mb-6 font-family-jakarta">
+              <div className="bg-dark-gray rounded-2xl border border-foreground-800 p-8 hover:border-terminal-green/50 transition-all duration-300 group shadow-lg hover:shadow-terminal-green/20">
+                <h2 className="text-2xl font-bold text-white mb-6 font-family-jakarta group-hover:text-terminal-green/90 transition-colors">
                   Experience
                 </h2>
                 <div className="space-y-6">
@@ -91,8 +91,8 @@ const Resume: React.FC = () => {
               </div>
 
               {/* Education Section */}
-              <div className="bg-dark-gray rounded-2xl border border-gray-700 p-8">
-                <h2 className="text-2xl font-bold text-white mb-6 font-family-jakarta">
+              <div className="bg-dark-gray rounded-2xl border border-foreground-800 p-8 hover:border-terminal-green/50 transition-all duration-300 group shadow-lg hover:shadow-terminal-green/20">
+                <h2 className="text-2xl font-bold text-white mb-6 font-family-jakarta group-hover:text-terminal-green/90 transition-colors">
                   Education
                 </h2>
                 <div className="space-y-4">
@@ -117,21 +117,21 @@ const Resume: React.FC = () => {
             <div className="space-y-8">
               
               {/* Skills Section */}
-              <div className="bg-dark-gray rounded-2xl border border-gray-700 p-8">
-                <h2 className="text-2xl font-bold text-white mb-6 font-family-jakarta">
+              <div className="bg-dark-gray rounded-2xl border border-foreground-800 p-8 hover:border-terminal-green/50 transition-all duration-300 group shadow-lg hover:shadow-terminal-green/20">
+                <h2 className="text-2xl font-bold text-white mb-6 font-family-jakarta group-hover:text-terminal-green/90 transition-colors">
                   Skills
                 </h2>
                 <div className="space-y-6">
                   {Object.entries(skills).map(([category, skillList]) => (
                     <div key={category}>
-                      <h3 className="text-lg font-semibold text-white mb-3 font-family-jakarta">
+                      <h3 className="text-lg font-semibold text-white mb-3 font-family-jakarta group-hover:text-terminal-green/80 transition-colors">
                         {category}
                       </h3>
                       <div className="flex flex-wrap gap-2">
                         {skillList.map((skill) => (
                           <span
                             key={skill}
-                            className="bg-green-900 text-terminal-green px-3 py-1 rounded-full text-sm font-medium border border-green-600"
+                            className="bg-terminal-green/10 text-terminal-green px-3 py-1 rounded-full text-sm font-medium border border-terminal-green/30 group-hover:bg-terminal-green/20 group-hover:shadow-terminal-green/30 group-hover:shadow-sm transition-all"
                           >
                             {skill}
                           </span>
@@ -143,29 +143,29 @@ const Resume: React.FC = () => {
               </div>
 
               {/* Contact & Links */}
-              <div className="bg-dark-gray rounded-2xl border border-gray-700 p-8">
-                <h2 className="text-2xl font-bold text-white mb-6 font-family-jakarta">
+              <div className="bg-dark-gray rounded-2xl border border-foreground-800 p-8 hover:border-terminal-green/50 transition-all duration-300 group shadow-lg hover:shadow-terminal-green/20">
+                <h2 className="text-2xl font-bold text-white mb-6 font-family-jakarta group-hover:text-terminal-green/90 transition-colors">
                   Contact
                 </h2>
                 <div className="space-y-4">
                   <div>
-                    <h3 className="text-white font-semibold mb-2 font-family-jakarta">Email</h3>
-                    <p className="text-gray-300">contact@chairulridjal.xyz</p>
+                    <h3 className="text-white font-semibold mb-2 font-family-jakarta group-hover:text-terminal-green/80 transition-colors">Email</h3>
+                    <p className="text-gray-300 group-hover:text-gray-200 transition-colors">contact@chairulridjal.xyz</p>
                   </div>
                   <div>
-                    <h3 className="text-white font-semibold mb-2 font-family-jakarta">Location</h3>
-                    <p className="text-gray-300">Indonesia</p>
+                    <h3 className="text-white font-semibold mb-2 font-family-jakarta group-hover:text-terminal-green/80 transition-colors">Location</h3>
+                    <p className="text-gray-300 group-hover:text-gray-200 transition-colors">Indonesia</p>
                   </div>
                   <div>
-                    <h3 className="text-white font-semibold mb-2 font-family-jakarta">Links</h3>
+                    <h3 className="text-white font-semibold mb-2 font-family-jakarta group-hover:text-terminal-green/80 transition-colors">Links</h3>
                     <div className="space-y-2">
-                      <a href="#" className="block text-terminal-green hover:text-green-300 transition-colors">
+                      <a href="#" className="block text-terminal-green hover:text-green-300 hover:ml-2 transition-all duration-200">
                         GitHub →
                       </a>
-                      <a href="#" className="block text-terminal-green hover:text-green-300 transition-colors">
+                      <a href="#" className="block text-terminal-green hover:text-green-300 hover:ml-2 transition-all duration-200">
                         LinkedIn →
                       </a>
-                      <a href="#" className="block text-terminal-green hover:text-green-300 transition-colors">
+                      <a href="#" className="block text-terminal-green hover:text-green-300 hover:ml-2 transition-all duration-200">
                         Portfolio →
                       </a>
                     </div>
@@ -174,8 +174,8 @@ const Resume: React.FC = () => {
               </div>
 
               {/* Download Resume */}
-              <div className="bg-dark-gray rounded-2xl border border-gray-700 p-8 text-center">
-                <button className="w-full bg-green-700 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition-colors border border-green-600 font-family-jakarta">
+              <div className="bg-dark-gray rounded-2xl border border-foreground-800 p-8 text-center hover:border-terminal-green/50 transition-all duration-300 group shadow-lg hover:shadow-terminal-green/20">
+                <button className="w-full bg-terminal-green/10 text-terminal-green px-6 py-3 rounded-lg hover:bg-terminal-green/20 hover:shadow-terminal-green/30 hover:shadow-sm transition-all duration-200 border border-terminal-green/30 font-family-jakarta group-hover:scale-105">
                   Download PDF Resume
                 </button>
               </div>

@@ -1,0 +1,95 @@
+{
+  "nav": {
+    "home": "index.js",
+    "about": "tentang.md",
+    "projects": "proyek.py",
+    "blog": "blog.sh",
+    "resume": "cv.pdf"
+  },
+  "hero": {
+    "greeting": "Halo, saya",
+    "name": "Chairulridjal",
+    "title": "Full-Stack Developer & AI Enthusiast",
+    "description": "Saya menciptakan solusi digital inovatif dengan teknologi web modern. Bersemangat membangun aplikasi yang membuat perbedaan nyata dalam kehidupan orang.",
+    "cta": "Hubungi saya"
+  },
+  "about": {
+    "title": "Tentang Saya",
+    "name": "Mochamad Chairulridjal",
+    "role": "Full-Stack Developer & AI Enthusiast",
+    "description": "Saya menciptakan solusi digital inovatif dengan teknologi web modern. Bersemangat membangun aplikasi yang membuat perbedaan nyata dalam kehidupan orang.",
+    "skills": {
+      "title": "Keahlian Teknis",
+      "frontend": "Frontend",
+      "backend": "Backend & AI"
+    },
+    "experience": {
+      "title": "Pengalaman",
+      "fullstack": {
+        "title": "Full-Stack Developer",
+        "period": "2023 - Sekarang",
+        "description": "Membangun aplikasi web modern dengan React, TypeScript, dan Node.js. Fokus pada pembuatan solusi yang scalable dan user-friendly."
+      },
+      "ai": {
+        "title": "AI/ML Enthusiast",
+        "period": "2022 - Sekarang",
+        "description": "Mengeksplorasi teknologi artificial intelligence dan machine learning. Bekerja pada proyek inovatif dalam pengembangan berbasis AI."
+      }
+    },
+    "stats": {
+      "experience": "Tahun Pengalaman",
+      "projects": "Proyek Dibuat",
+      "learning": "Selalu Belajar"
+    }
+  },
+  "projects": {
+    "title": "Proyek Saya",
+    "subtitle": "Berikut adalah beberapa proyek yang sedang saya kerjakan",
+    "viewProject": "Lihat Proyek",
+    "viewCode": "Lihat Kode",
+    "liveDemo": "Demo Live"
+  },
+  "blog": {
+    "title": "Artikel Blog",
+    "subtitle": "Pemikiran tentang teknologi, pengembangan, dan inovasi",
+    "readMore": "Baca Selengkapnya",
+    "publishedOn": "Dipublikasikan pada"
+  },
+  "contact": {
+    "title": "Hubungi Saya",
+    "subtitle": "Mari bekerja sama dalam sesuatu yang luar biasa",
+    "form": {
+      "name": "Nama",
+      "email": "Email",
+      "subject": "Subjek",
+      "message": "Pesan",
+      "send": "Kirim Pesan",
+      "sending": "Mengirim...",
+      "success": "Pesan berhasil dikirim!",
+      "error": "Gagal mengirim pesan. Silakan coba lagi."
+    }
+  },
+  "chatbot": {
+    "title": "tanya-saya.js",
+    "placeholder": "Apa yang ingin Anda ketahui?",
+    "greeting": "Halo! Saya asisten AI Chairulridjal. Tanyakan apa saja tentang pekerjaan, keahlian, atau proyeknya!"
+  },
+  "spotify": {
+    "title": "spotify.js",
+    "nowPlaying": "Sedang Diputar",
+    "recentlyPlayed": "Baru Saja Diputar",
+    "notPlaying": "Tidak sedang memutar musik"
+  },
+  "terminal": {
+    "title": "bash",
+    "copy": "salin"
+  },
+  "common": {
+    "loading": "Memuat...",
+    "error": "Error",
+    "retry": "Coba Lagi",
+    "close": "Tutup",
+    "menu": "Menu",
+    "darkMode": "Mode Gelap"
+  }
+}

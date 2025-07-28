@@ -1,4 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useAI } from '../../hooks/useAI';
 
 interface Message {
   id: string;
@@ -8,17 +10,25 @@ interface Message {
 }
 
 const Chatbot: React.FC = () => {
+  const { t, i18n } = useTranslation();
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      text: 'Ask me anything!',
+      text: t('chatbot.greeting'),
       isUser: false,
       timestamp: new Date()
     }
   ]);
   const [inputValue, setInputValue] = useState('');
-  const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const { sendMessage, isLoading } = useAI();
+
+  // Update greeting message when language changes
+  useEffect(() => {
+    setMessages(prev => prev.map((msg, index) => 
+      index === 0 ? { ...msg, text: t('chatbot.greeting') } : msg
+    ));
+  }, [i18n.language, t]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -28,19 +38,8 @@ const Chatbot: React.FC = () => {
     scrollToBottom();
   }, [messages]);
 
-  const mockResponses = [
-    "Because clean energy isn't just about tech – it's about equity, future-proofing our world, and giving people access to power, literally.",
-    "Chairulridjal believes in building technology that serves humanity, especially in sustainable energy solutions.",
-    "He's passionate about creating applications that bridge the gap between cutting-edge tech and environmental impact.",
-    "His experience spans React, TypeScript, Python, and AI/ML – perfect tools for clean energy innovations.",
-    "Working on projects that combine modern web technologies with climate solutions is his main focus.",
-    "Clean energy tech needs better interfaces and data visualization – that's where his skills shine.",
-    "He's exploring how AI can optimize renewable energy systems and improve grid efficiency.",
-    "The intersection of technology and sustainability is where the future lies, and that's his playground."
-  ];
-
   const handleSendMessage = async () => {
-    if (!inputValue.trim()) return;
+    if (!inputValue.trim() || isLoading) return;
 
     const userMessage: Message = {
       id: Date.now().toString(),
@@ -50,21 +49,27 @@ const Chatbot: React.FC = () => {
     };
 
     setMessages(prev => [...prev, userMessage]);
+    const currentInput = inputValue;
     setInputValue('');
-    setIsTyping(true);
 
-    // Simulate AI response delay
-    setTimeout(() => {
-      const randomResponse = mockResponses[Math.floor(Math.random() * mockResponses.length)];
+    try {
+      const response = await sendMessage(currentInput);
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: randomResponse,
+        text: response.text,
         isUser: false,
         timestamp: new Date()
       };
       setMessages(prev => [...prev, botMessage]);
-      setIsTyping(false);
-    }, 1000 + Math.random() * 2000);
+    } catch (error) {
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        text: "I'm having trouble processing that. Please try again!",
+        isUser: false,
+        timestamp: new Date()
+      };
+      setMessages(prev => [...prev, errorMessage]);
+    }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -75,12 +80,11 @@ const Chatbot: React.FC = () => {
   };
 
   return (
-    <div className="bg-dark-black rounded-2xl border border-foreground-800 h-[600px] flex flex-col">
+    <div className="bg-dark-gray rounded-2xl border border-foreground-800 h-[600px] flex flex-col hover:border-terminal-green/50 transition-all duration-300 group shadow-lg hover:shadow-terminal-green/20">
       {/* Terminal Header */}
-      <div className="bg-dark-gray border-b border-foreground-800 px-4 py-3 rounded-t-2xl">
-        <div className="flex items-center justify-between">
-          <span className="text-muted-gray text-sm font-mono">ask-me.js</span>
-        </div>
+      <div className="terminal-header">
+        <div className="terminal-title">{t('chatbot.title')}</div>
+        <button className="terminal-button group-hover:text-terminal-green/80 transition-colors">{t('terminal.copy')}</button>
       </div>
 
       {/* Messages Area */}
@@ -119,7 +123,7 @@ const Chatbot: React.FC = () => {
           </div>
         ))}
         
-        {isTyping && (
+        {isLoading && (
           <div className="flex items-center space-x-2">
             <img 
               src="src\assets\images\Avatar.png" 
@@ -148,13 +152,13 @@ const Chatbot: React.FC = () => {
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyPress={handleKeyPress}
-            placeholder="What would you like to know?"
+            placeholder={t('chatbot.placeholder')}
             className="flex-1 bg-transparent text-white font-mono text-sm focus:outline-none placeholder-muted-gray border-none"
           />
           {inputValue.trim() && (
             <button
               onClick={handleSendMessage}
-              disabled={isTyping}
+              disabled={isLoading}
               className="text-terminal-green hover:text-green-300 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm font-mono"
             >
               [Enter]
