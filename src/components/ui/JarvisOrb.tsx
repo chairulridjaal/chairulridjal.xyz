@@ -30,7 +30,7 @@ const JarvisOrb: React.FC = () => {
   const rotationRef = useRef({ x: 0, y: 0, z: 0 });
   const electronsRef = useRef<Electron[]>([]);
   const [isHovered, setIsHovered] = useState(false);
-  const [pulse, setPulse] = useState(1);
+  // pulse state removed, use local pulseValue only
   const [sparkles, setSparkles] = useState<{x:number,y:number,alpha:number,life:number}[]>([]);
 
   // Create icosphere vertices for 3D effect
@@ -164,7 +164,6 @@ const JarvisOrb: React.FC = () => {
 
       // Pulse value for scale and glow
       const pulseValue = 1 + Math.sin(time * 2) * 0.08;
-      setPulse(pulseValue);
 
       // Gentle floating movement for nucleus
       const floatX = Math.sin(time * 0.7) * 18;
