@@ -31,7 +31,11 @@ const Chatbot: React.FC = () => {
   }, [i18n.language, t]);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    // Find the messages container and scroll it to bottom instead of using scrollIntoView
+    const messagesContainer = messagesEndRef.current?.parentElement;
+    if (messagesContainer) {
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
   };
 
   useEffect(() => {

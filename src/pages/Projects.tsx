@@ -3,6 +3,7 @@ import { Layout } from '../components';
 
 const Projects: React.FC = () => {
   useEffect(() => {
+    // Simple, immediate scroll to top
     window.scrollTo(0, 0);
   }, []);
 

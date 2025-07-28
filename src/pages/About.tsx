@@ -5,7 +5,17 @@ import SpotifyNowPlaying from '../components/ui/SpotifyNowPlaying';
 
 const About: React.FC = () => {
   useEffect(() => {
+    // Force scroll to top immediately
     window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    
+    // Also use requestAnimationFrame to ensure it happens after any layout changes
+    requestAnimationFrame(() => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    });
   }, []);
 
   return (
@@ -166,7 +176,7 @@ const About: React.FC = () => {
             </div>
 
             {/* Right Column - Chatbot */}
-            <div className="xl:sticky xl:top-24 space-y-8">
+            <div className="space-y-8">
               <Chatbot />
               
               {/* Spotify Now Playing */}
