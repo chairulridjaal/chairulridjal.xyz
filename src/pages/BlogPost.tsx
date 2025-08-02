@@ -75,7 +75,7 @@ const BlogPost: React.FC = () => {
 
     // Cleanup function to reset meta tags when component unmounts
     return () => {
-      document.title = 'Chairulridjal - Full Stack Developer';
+      document.title = 'chairulridjal';
       document.querySelectorAll('meta[property^="og:"], meta[property^="article:"], meta[name^="twitter:"]').forEach(tag => tag.remove());
     };
   }, [blogPost]);

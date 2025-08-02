@@ -255,10 +255,10 @@ const Resume: React.FC = () => {
                     <div className="absolute -bottom-1 -right-0 w-6 h-6 bg-terminal-green rounded-full border-2 border-dark-black group-hover:shadow-terminal-green/50 group-hover:shadow-lg transition-shadow duration-300"></div>
                   </div>
                   <h3 className="text-xl font-bold text-white mb-2 plus-jakarta-sans group-hover:text-terminal-green/90 transition-colors">
-                    Mochamad Chairulridjal
+                    Mochamad Chairulridjal Nurvikri
                   </h3>
                   <p className="text-terminal-green/80 font-medium mb-4">
-                    Software Developer & Tech Leader
+                    Software Developer & Tech Enthusiast
                   </p>
                   <p className="text-gray-300 text-sm leading-relaxed">
                     Passionate about building sustainable technology solutions and leading innovative projects. 

@@ -7,6 +7,8 @@ const Blog: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTag, setSelectedTag] = useState('');
   const [sortBy, setSortBy] = useState('newest');
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 4;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -50,10 +52,22 @@ const Blog: React.FC = () => {
     return filtered;
   }, [searchTerm, selectedTag, sortBy]);
 
+  // Calculate pagination
+  const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
+  const startIndex = (currentPage - 1) * postsPerPage;
+  const endIndex = startIndex + postsPerPage;
+  const currentPosts = filteredPosts.slice(startIndex, endIndex);
+
+  // Reset page when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, selectedTag, sortBy]);
+
   const clearFilters = () => {
     setSearchTerm('');
     setSelectedTag('');
     setSortBy('newest');
+    setCurrentPage(1);
   };
 
   return (
@@ -138,23 +152,25 @@ const Blog: React.FC = () => {
 
             {/* Results Summary */}
             <div className="mt-4 text-sm text-gray-400">
-              {filteredPosts.length === blogPosts.length ? (
-                `Showing all ${blogPosts.length} posts`
+              {filteredPosts.length === 0 ? (
+                'No posts found'
+              ) : filteredPosts.length === blogPosts.length ? (
+                `Showing ${startIndex + 1}-${Math.min(endIndex, filteredPosts.length)} of ${blogPosts.length} posts`
               ) : (
-                `Showing ${filteredPosts.length} of ${blogPosts.length} posts`
+                `Showing ${startIndex + 1}-${Math.min(endIndex, filteredPosts.length)} of ${filteredPosts.length} filtered posts`
               )}
             </div>
           </div>
 
           {/* Blog Posts Grid */}
-          <div className="space-y-6 mb-16">
-            {filteredPosts.length === 0 ? (
+          <div className="space-y-6 mb-8">
+            {currentPosts.length === 0 ? (
               <div className="text-center py-16">
                 <div className="text-gray-400 text-lg mb-4">No posts found</div>
                 <p className="text-gray-500">Try adjusting your search or filter criteria</p>
               </div>
             ) : (
-              filteredPosts.map((post) => (
+              currentPosts.map((post) => (
                 <div
                   key={post.id}
                   className="bg-dark-gray rounded-2xl border border-foreground-800 overflow-hidden hover:border-terminal-green/50 transition-all duration-300 group shadow-lg hover:shadow-terminal-green/20"
@@ -247,33 +263,57 @@ const Blog: React.FC = () => {
                 </div>
               ))
             )}
-          </div>          {/* Call to Action Section */}
-          <div className="bg-dark-gray rounded-2xl border border-foreground-800 p-8 text-center hover:border-terminal-green/50 transition-all duration-300 group shadow-lg hover:shadow-terminal-green/20">
-            <div className="flex items-center justify-center mb-6">
-              <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-terminal-green/10 border border-terminal-green/30 group-hover:bg-terminal-green/20 transition-colors">
-                <svg className="w-6 h-6 text-terminal-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                </svg>
-              </div>
-            </div>
-            
-            <h2 className="text-2xl font-bold text-white mb-4 group-hover:text-terminal-green/90 transition-colors">
-              More Posts Coming Soon
-            </h2>
-            <p className="text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed group-hover:text-gray-200 transition-colors">
-              I'm working on more content about climate tech, web development, and AI. 
-              Stay tuned for updates!
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-terminal-green/10 text-terminal-green px-6 py-3 rounded-xl hover:bg-terminal-green/20 hover:shadow-terminal-green/40 hover:shadow-lg transition-all duration-300 border border-terminal-green/30 hover:border-terminal-green/50 font-medium">
-                Subscribe to Updates
-              </button>
-              <button className="bg-gray-700/50 text-white px-6 py-3 rounded-xl hover:bg-terminal-green/10 hover:text-terminal-green hover:border-terminal-green/30 transition-all duration-300 border border-gray-600 hover:shadow-terminal-green/20 hover:shadow-lg font-medium">
-                RSS Feed
-              </button>
-            </div>
           </div>
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="flex justify-center items-center space-x-2 mb-16">
+              {/* Previous Button */}
+              <button
+                onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                disabled={currentPage === 1}
+                className={`px-4 py-2 rounded-lg border transition-all duration-300 ${
+                  currentPage === 1
+                    ? 'bg-gray-700/50 text-gray-500 border-gray-600 cursor-not-allowed'
+                    : 'bg-dark-gray text-gray-300 border-foreground-800 hover:bg-terminal-green/10 hover:text-terminal-green hover:border-terminal-green/30'
+                }`}
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+
+              {/* Page Numbers */}
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                <button
+                  key={page}
+                  onClick={() => setCurrentPage(page)}
+                  className={`px-4 py-2 rounded-lg border transition-all duration-300 ${
+                    currentPage === page
+                      ? 'bg-terminal-green/20 text-terminal-green border-terminal-green/40'
+                      : 'bg-dark-gray text-gray-300 border-foreground-800 hover:bg-terminal-green/10 hover:text-terminal-green hover:border-terminal-green/30'
+                  }`}
+                >
+                  {page}
+                </button>
+              ))}
+
+              {/* Next Button */}
+              <button
+                onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                disabled={currentPage === totalPages}
+                className={`px-4 py-2 rounded-lg border transition-all duration-300 ${
+                  currentPage === totalPages
+                    ? 'bg-gray-700/50 text-gray-500 border-gray-600 cursor-not-allowed'
+                    : 'bg-dark-gray text-gray-300 border-foreground-800 hover:bg-terminal-green/10 hover:text-terminal-green hover:border-terminal-green/30'
+                }`}
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </Layout>

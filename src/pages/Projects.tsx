@@ -3,7 +3,6 @@ import { Layout } from '../components';
 
 const Projects: React.FC = () => {
   useEffect(() => {
-    // Simple, immediate scroll to top
     window.scrollTo(0, 0);
   }, []);
 
@@ -13,7 +12,7 @@ const projects = [
     title: 'Personal Website',
     description:
       'A modern developer portfolio built with React, TypeScript, and Tailwind CSS. Features AI-powered assistant via OpenRouter, dynamic Spotify integration, and multilingual support.',
-    image: 'public/assets/images/personalweb.png',
+    image: '/assets/images/personalweb.png',
     technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'GPT-4o Mini', 'OpenRouter'],
     github: 'https://github.com/chairulridjaal/chairulridjal.xyz',
     demo: 'https://chairulridjal.xyz/',
@@ -24,7 +23,7 @@ const projects = [
     title: 'HerdSphere – Livestock Management App',
     description:
       'A mobile-first livestock and farm management platform built with Firebase. Supports multi-farm access, animal health/event tracking, and scalable architecture for future IoT integration.',
-    image: 'public/assets/images/HerdSphere Logo_ Livestock Management Solution.png',
+    image: '/assets/images/HerdSphere Logo_ Livestock Management Solution.png',
     technologies: ['React', 'Vite', 'Firebase', 'TypeScript', 'Tailwind CSS'],
     github: 'https://github.com/chairulridjaal/HerdSphere', // replace
     demo: 'https://herdsphere.xyz/',
@@ -35,7 +34,7 @@ const projects = [
     title: 'KalaNusa – Cultural Preservation App',
     description:
       'A mobile-first app to preserve Indonesian culture through AI. Features Kala the Lutung, an AI chatbot companion for folklore and traditions, and a Scripture Scanner that transcribes and analyzes artifacts using OCR and AI. Includes gamified user profiles, a contribution tracker, and a growing digital public library.',
-    image: 'public/assets/images/kalanusa.jpg', // replace with your image
+    image: '/assets/images/KalaNusa.jpg', // replace with your image
     technologies: ['React Native', 'Supabase', 'Mastra AI', 'OpenAI GPT-4o Mini', 'OCR'],
     github: 'https://github.com/raihanpka/dramaga-cantieeek-garudahacks', // replace
     demo: 'https://kalanusa.vercel.app/',
