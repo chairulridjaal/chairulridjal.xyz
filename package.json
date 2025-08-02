@@ -11,6 +11,7 @@
     "spotify-setup": "node scripts/spotify-setup.js"
   },
   "dependencies": {
+    "@vercel/analytics": "^1.5.0",
     "i18next": "^25.3.2",
     "i18next-browser-languagedetector": "^8.2.0",
     "react": "^19.1.0",

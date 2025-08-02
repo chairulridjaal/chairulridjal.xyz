@@ -5,12 +5,10 @@ import SpotifyNowPlaying from '../components/ui/SpotifyNowPlaying';
 
 const About: React.FC = () => {
   useEffect(() => {
-    // Force scroll to top immediately
     window.scrollTo(0, 0);
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
     
-    // Also use requestAnimationFrame to ensure it happens after any layout changes
     requestAnimationFrame(() => {
       window.scrollTo(0, 0);
       document.documentElement.scrollTop = 0;
@@ -100,65 +98,105 @@ const About: React.FC = () => {
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
             
             {/* Left Column - About Content */}
-            <div className="flex flex-col space-y-8">
-              
-              {/* Skills Section */}
+            <div className="flex flex-col space-y-8 h-full">
               <div className="bg-dark-gray rounded-2xl border border-foreground-800 p-8 hover:border-terminal-green/50 transition-all duration-300 group shadow-lg hover:shadow-terminal-green/20">
                 <h2 className="text-2xl font-bold text-white mb-6 font-family-jakarta flex items-center group-hover:text-terminal-green/90 transition-colors">
                   <span className="w-2 h-2 bg-terminal-green rounded-full mr-3 group-hover:shadow-terminal-green/50 group-hover:shadow-md transition-shadow"></span>
-                  Technical Skills
+                  About Me
                 </h2>
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <h3 className="text-terminal-green font-semibold mb-3 text-sm uppercase tracking-wider">Frontend</h3>
-                    <div className="space-y-2">
-                      {['React', 'TypeScript', 'Tailwind CSS', 'Vite'].map((skill) => (
-                        <div key={skill} className="flex items-center text-gray-300">
-                          <span className="text-terminal-green mr-2">▸</span>
-                          {skill}
-                        </div>
-                      ))}
+                
+                <div className="space-y-6">
+                  {/* Quick intro */}
+                  <div className="bg-terminal-green/5 border-l-4 border-terminal-green/30 pl-4 py-3 rounded-r-lg">
+                    <p className="text-gray-300 leading-relaxed">
+                      Hey! I'm Ridjal, a developer from Indonesia who's passionate about using 
+                      <span className="text-terminal-green font-medium"> AI to tackle climate challenges</span>. 
+                      I believe technology should serve both humanity and our planet.
+                    </p>
+                  </div>
+
+                  {/* Key highlights */}
+                  <div className="space-y-4">
+                    
+                    <div className="flex items-start space-x-3">
+                      <div className="w-2 h-2 bg-terminal-green rounded-full mt-2 flex-shrink-0"></div>
+                      <div>
+                        <p className="text-gray-300 text-sm">
+                          <span className="text-white font-medium">Current Focus:</span> Building AI models for renewable energy 
+                          optimization and leading tech communities at IEEE & GDG on Campus.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start space-x-3">
+                      <div className="w-2 h-2 bg-terminal-green rounded-full mt-2 flex-shrink-0"></div>
+                      <div>
+                        <p className="text-gray-300 text-sm">
+                          <span className="text-white font-medium">When Not Coding:</span> Exploring renewable energy research, 
+                          discovering new music, playing games, and fostering cross-cultural collaboration.
+                        </p>
+                      </div>
                     </div>
                   </div>
-                  <div>
-                    <h3 className="text-terminal-green font-semibold mb-3 text-sm uppercase tracking-wider">Backend & AI</h3>
-                    <div className="space-y-2">
-                      {['Node.js', 'Python', 'AI/ML', 'PostgreSQL'].map((skill) => (
-                        <div key={skill} className="flex items-center text-gray-300">
-                          <span className="text-terminal-green mr-2">▸</span>
-                          {skill}
-                        </div>
-                      ))}
-                    </div>
+
+                  {/* Call to action */}
+                  <div className="pt-4 border-t border-gray-700/50">
+                    <p className="text-gray-400 text-sm italic">
+                      💬 Want to know more? Ask me anything using the chatbot! →
+                    </p>
                   </div>
                 </div>
               </div>
 
-              {/* Experience Timeline */}
-              <div className="bg-dark-gray rounded-2xl border border-foreground-800 p-8 hover:border-terminal-green/50 transition-all duration-300 flex-1 group shadow-lg hover:shadow-terminal-green/20">
+              {/* Technical Skills Section - This will expand to fill remaining space */}
+              <div className="bg-dark-gray rounded-2xl border border-foreground-800 p-8 hover:border-terminal-green/50 transition-all duration-300 group shadow-lg hover:shadow-terminal-green/20 flex-1">
                 <h2 className="text-2xl font-bold text-white mb-6 font-family-jakarta flex items-center group-hover:text-terminal-green/90 transition-colors">
                   <span className="w-2 h-2 bg-terminal-green rounded-full mr-3 group-hover:shadow-terminal-green/50 group-hover:shadow-md transition-shadow"></span>
-                  Experience
+                  Technical Skills
                 </h2>
+                
                 <div className="space-y-6">
-                  <div className="relative pl-6">
-                    <div className="absolute left-0 top-2 w-3 h-3 bg-terminal-green rounded-full"></div>
-                    <div className="absolute left-1.5 top-5 w-px h-16 bg-gray-600"></div>
-                    <h3 className="text-lg font-semibold text-white font-family-jakarta">Full-Stack Developer</h3>
-                    <p className="text-terminal-green text-sm font-medium mb-2">2023 - Present</p>
-                    <p className="text-gray-300">
-                      Building modern web applications with React, TypeScript, and Node.js. 
-                      Focus on creating scalable, user-friendly solutions.
-                    </p>
-                  </div>
-                  <div className="relative pl-6">
-                    <div className="absolute left-0 top-2 w-3 h-3 bg-gray-500 rounded-full"></div>
-                    <h3 className="text-lg font-semibold text-white font-family-jakarta">AI/ML Enthusiast</h3>
-                    <p className="text-terminal-green text-sm font-medium mb-2">2022 - Present</p>
-                    <p className="text-gray-300">
-                      Exploring artificial intelligence and machine learning technologies. 
-                      Working on innovative projects in AI-driven development.
-                    </p>
+                  {/* Skills categories */}
+                  <div className="space-y-4">
+                    <div className="flex items-start space-x-3">
+                      <div className="w-2 h-2 bg-terminal-green rounded-full mt-2 flex-shrink-0"></div>
+                      <div>
+                        <p className="text-gray-300 text-sm">
+                          <span className="text-white font-medium">AI/ML & Data:</span> Python, TensorFlow, PyTorch, 
+                          Pandas, NumPy, Scikit-learn, Jupyter
+                        </p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start space-x-3">
+                      <div className="w-2 h-2 bg-terminal-green rounded-full mt-2 flex-shrink-0"></div>
+                      <div>
+                        <p className="text-gray-300 text-sm">
+                          <span className="text-white font-medium">Frontend & UI:</span> React, TypeScript, JavaScript, 
+                          Tailwind CSS, Next.js, Vite
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start space-x-3">
+                      <div className="w-2 h-2 bg-terminal-green rounded-full mt-2 flex-shrink-0"></div>
+                      <div>
+                        <p className="text-gray-300 text-sm">
+                          <span className="text-white font-medium">Backend & Database:</span> Node.js, Firebase, 
+                          PostgreSQL, MongoDB
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start space-x-3">
+                      <div className="w-2 h-2 bg-terminal-green rounded-full mt-2 flex-shrink-0"></div>
+                      <div>
+                        <p className="text-gray-300 text-sm">
+                          <span className="text-white font-medium">Tools & Platform:</span> Git, Docker, AWS, 
+                          Vercel, Linux, VS Code
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -166,7 +204,7 @@ const About: React.FC = () => {
               {/* Quick Stats */}
               <div className="grid grid-cols-3 gap-4">
                 <div className="bg-dark-gray rounded-2xl border border-foreground-800 p-4 text-center hover:border-terminal-green/50 transition-all duration-300 group shadow-lg hover:shadow-terminal-green/20">
-                  <div className="text-2xl font-bold text-terminal-green font-family-jakarta group-hover:scale-110 transition-transform">2+</div>
+                  <div className="text-2xl font-bold text-terminal-green font-family-jakarta group-hover:scale-110 transition-transform">4+</div>
                   <div className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors">Years Experience</div>
                 </div>
                 <div className="bg-dark-gray rounded-2xl border border-foreground-800 p-4 text-center hover:border-terminal-green/50 transition-all duration-300 group shadow-lg hover:shadow-terminal-green/20">
@@ -183,9 +221,22 @@ const About: React.FC = () => {
             {/* Right Column - Chatbot */}
             <div className="space-y-8">
               <Chatbot />
-              
+
               {/* Spotify Now Playing */}
               <SpotifyNowPlaying />
+            </div>
+          </div>
+
+          {/* Quote Section */}
+          <div className="mt-12 bg-dark-gray rounded-2xl border border-foreground-800 p-9 text-center hover:border-terminal-green/50 transition-all duration-300 group shadow-lg hover:shadow-terminal-green/20">
+            <div className="max-w-3xl mx-auto">
+              <svg className="w-12 h-12 text-terminal-green/30 mx-auto mb-6 group-hover:text-terminal-green/50 transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z"/>
+              </svg>
+              <blockquote className="text-2xl text-gray-300 font-medium italic mb-4 group-hover:text-gray-200 transition-colors">
+                "All that you touch you change. All that you change changes you. The only lasting truth is change."
+              </blockquote>
+              <cite className="text-terminal-green font-family-jakarta">— Octavia E. Butler, Parable of the Sower</cite>
             </div>
           </div>
         </div>

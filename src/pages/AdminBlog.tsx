@@ -19,7 +19,7 @@ const AdminBlog: React.FC = () => {
     image: '',
     imageAlt: '',
     intro: '',
-    sections: [{ title: '', content: '', code: '' }],
+    sections: [{ title: '', content: '', code: '', image: '', imageAlt: '', imageCaption: '' }],
     conclusion: '',
     metaDescription: '',
     keywords: ''
@@ -31,8 +31,7 @@ const AdminBlog: React.FC = () => {
 
   const handleAuth = (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, this would be more secure, but for client-side it's basic protection
-    const adminPassword = import.meta.env.VITE_ADMIN_PASSWORD || 'admin123';
+    const adminPassword = import.meta.env.VITE_ADMIN_PASSWORD;
     if (password === adminPassword) {
       setIsAuthenticated(true);
     } else {
@@ -53,7 +52,7 @@ const AdminBlog: React.FC = () => {
   const addSection = () => {
     setFormData(prev => ({
       ...prev,
-      sections: [...prev.sections, { title: '', content: '', code: '' }]
+      sections: [...prev.sections, { title: '', content: '', code: '', image: '', imageAlt: '', imageCaption: '' }]
     }));
   };
 

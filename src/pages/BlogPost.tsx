@@ -219,18 +219,88 @@ const BlogPost: React.FC = () => {
                       <h2 id={headingId} className="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4">
                         {section.title}
                       </h2>
-                      <p className="text-gray-300 leading-relaxed mb-4 sm:mb-6 text-sm sm:text-base">
-                        {section.content}
-                      </p>
                       
-                      {section.code && (
-                        <div className="mb-4 sm:mb-6">
-                          <pre className="bg-gray-900 border border-gray-700 rounded-lg sm:rounded-xl p-3 sm:p-6 overflow-x-auto text-xs sm:text-sm">
-                            <code className="text-gray-300">
-                              {section.code}
-                            </code>
-                          </pre>
+                      {/* Check if section has contentParts for more flexible content */}
+                      {section.contentParts ? (
+                        <div className="space-y-4 sm:space-y-6">
+                          {section.contentParts.map((part, partIndex) => (
+                            <div key={partIndex}>
+                              {part.type === 'text' && (
+                                <p className="text-gray-300 leading-relaxed text-sm sm:text-base">
+                                  {part.content}
+                                </p>
+                              )}
+                              
+                              {part.type === 'image' && part.image && (
+                                <div className="my-4 sm:my-6">
+                                  <div className="relative overflow-hidden rounded-lg sm:rounded-xl border border-gray-700">
+                                    <img
+                                      src={part.image}
+                                      alt={part.imageAlt || `Image for ${section.title}`}
+                                      className="w-full h-auto object-cover"
+                                      onError={(e) => {
+                                        e.currentTarget.src = `https://via.placeholder.com/800x400/1a1a1a/00FF41?text=${encodeURIComponent(section.title + ' Image')}`;
+                                      }}
+                                    />
+                                  </div>
+                                  {part.imageCaption && (
+                                    <p className="text-gray-400 text-xs sm:text-sm mt-2 text-center italic">
+                                      {part.imageCaption}
+                                    </p>
+                                  )}
+                                </div>
+                              )}
+                              
+                              {part.type === 'code' && (
+                                <div className="my-4 sm:my-6">
+                                  <pre className="bg-gray-900 border border-gray-700 rounded-lg sm:rounded-xl p-3 sm:p-6 overflow-x-auto text-xs sm:text-sm">
+                                    <code className="text-gray-300">
+                                      {part.content}
+                                    </code>
+                                  </pre>
+                                </div>
+                              )}
+                            </div>
+                          ))}
                         </div>
+                      ) : (
+                        /* Fallback to original simple content structure */
+                        <>
+                          <p className="text-gray-300 leading-relaxed mb-4 sm:mb-6 text-sm sm:text-base">
+                            {section.content}
+                          </p>
+                          
+                          {/* Section Image */}
+                          {section.image && (
+                            <div className="mb-4 sm:mb-6">
+                              <div className="relative overflow-hidden rounded-lg sm:rounded-xl border border-gray-700">
+                                <img
+                                  src={section.image}
+                                  alt={section.imageAlt || `Image for ${section.title}`}
+                                  className="w-full h-auto object-cover"
+                                  onError={(e) => {
+                                    e.currentTarget.src = `https://via.placeholder.com/800x400/1a1a1a/00FF41?text=${encodeURIComponent(section.title + ' Image')}`;
+                                  }}
+                                />
+                              </div>
+                              {section.imageCaption && (
+                                <p className="text-gray-400 text-xs sm:text-sm mt-2 text-center italic">
+                                  {section.imageCaption}
+                                </p>
+                              )}
+                            </div>
+                          )}
+                          
+                          {section.code && (
+                            <div className="mb-4 sm:mb-6">
+                              <pre className="bg-gray-900 border border-gray-700 rounded-lg sm:rounded-xl p-3 sm:p-6 overflow-x-auto text-xs sm:text-sm">
+                                <code className="text-gray-300">
+                                  {section.code}
+                                </code>
+                              </pre>
+                            </div>
+                          )}
+                        </>
                       )}
                     </div>
                   );

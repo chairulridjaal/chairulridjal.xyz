@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import LanguageSwitcher from '../ui/LanguageSwitcher';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -11,7 +9,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
-  const { t } = useTranslation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,17 +34,19 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-6">
           <div className="flex space-x-4 lg:space-x-6 text-gray-300">
-            <Link to="/" className={`hover:text-terminal-green hover:drop-shadow-[0_0_8px_rgba(34,197,94,0.3)] transition-all duration-300 text-sm lg:text-base ${location.pathname === '/' ? 'text-terminal-green drop-shadow-[0_0_8px_rgba(34,197,94,0.4)]' : ''}`}>{t('nav.home')}</Link>
-            <Link to="/about" className={`hover:text-terminal-green hover:drop-shadow-[0_0_8px_rgba(34,197,94,0.3)] transition-all duration-300 text-sm lg:text-base ${location.pathname === '/about' ? 'text-terminal-green drop-shadow-[0_0_8px_rgba(34,197,94,0.4)]' : ''}`}>{t('nav.about')}</Link>
-            <Link to="/projects" className={`hover:text-terminal-green hover:drop-shadow-[0_0_8px_rgba(34,197,94,0.3)] transition-all duration-300 text-sm lg:text-base ${location.pathname === '/projects' ? 'text-terminal-green drop-shadow-[0_0_8px_rgba(34,197,94,0.4)]' : ''}`}>{t('nav.projects')}</Link>
-            <Link to="/blog" className={`hover:text-terminal-green hover:drop-shadow-[0_0_8px_rgba(34,197,94,0.3)] transition-all duration-300 text-sm lg:text-base ${location.pathname === '/blog' ? 'text-terminal-green drop-shadow-[0_0_8px_rgba(34,197,94,0.4)]' : ''}`}>{t('nav.blog')}</Link>
-            <Link to="/resume" className={`hover:text-terminal-green hover:drop-shadow-[0_0_8px_rgba(34,197,94,0.3)] transition-all duration-300 text-sm lg:text-base ${location.pathname === '/resume' ? 'text-terminal-green drop-shadow-[0_0_8px_rgba(34,197,94,0.4)]' : ''}`}>{t('nav.resume')}</Link>
+            <Link to="/" className={`hover:text-terminal-green hover:drop-shadow-[0_0_8px_rgba(34,197,94,0.3)] transition-all duration-300 text-sm lg:text-base ${location.pathname === '/' ? 'text-terminal-green drop-shadow-[0_0_8px_rgba(34,197,94,0.4)]' : ''}`}>index.js</Link>
+            <Link to="/about" className={`hover:text-terminal-green hover:drop-shadow-[0_0_8px_rgba(34,197,94,0.3)] transition-all duration-300 text-sm lg:text-base ${location.pathname === '/about' ? 'text-terminal-green drop-shadow-[0_0_8px_rgba(34,197,94,0.4)]' : ''}`}>about.md</Link>
+            <Link to="/projects" className={`hover:text-terminal-green hover:drop-shadow-[0_0_8px_rgba(34,197,94,0.3)] transition-all duration-300 text-sm lg:text-base ${location.pathname === '/projects' ? 'text-terminal-green drop-shadow-[0_0_8px_rgba(34,197,94,0.4)]' : ''}`}>projects.py</Link>
+            <Link to="/blog" className={`hover:text-terminal-green hover:drop-shadow-[0_0_8px_rgba(34,197,94,0.3)] transition-all duration-300 text-sm lg:text-base ${location.pathname === '/blog' ? 'text-terminal-green drop-shadow-[0_0_8px_rgba(34,197,94,0.4)]' : ''}`}>blog.sh</Link>
+            <Link to="/resume" className={`hover:text-terminal-green hover:drop-shadow-[0_0_8px_rgba(34,197,94,0.3)] transition-all duration-300 text-sm lg:text-base ${location.pathname === '/resume' ? 'text-terminal-green drop-shadow-[0_0_8px_rgba(34,197,94,0.4)]' : ''}`}>resume.pdf</Link>
           </div>
-          <div className="flex items-center space-x-2">
-            <LanguageSwitcher />
-            <button className="w-8 h-8 border border-gray-500 rounded-lg flex items-center justify-center hover:border-terminal-green hover:text-terminal-green hover:shadow-terminal-green/30 hover:shadow-lg transition-all duration-300 hover:drop-shadow-[0_0_8px_rgba(34,197,94,0.3)]">
-              <span className="text-sm">🌙</span>
-            </button>
+          <div className="flex items-center">
+            <Link
+              to="/contact"
+              className={`bg-terminal-green/10 text-terminal-green px-4 py-2 rounded-lg border border-terminal-green/30 hover:bg-terminal-green/20 hover:shadow-terminal-green/30 hover:shadow-lg transition-all duration-300 text-sm lg:text-base font-medium hover:scale-105 ${location.pathname === '/contact' ? 'bg-terminal-green/20 shadow-terminal-green/30 shadow-lg' : ''}`}
+            >
+              Connect
+            </Link>
           </div>
         </div>
 
@@ -82,7 +81,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           {/* Menu Header */}
           <div className="p-6 border-b border-foreground-800">
             <div className="flex items-center justify-between">
-              <span className="text-white text-lg font-medium">{t('common.menu')}</span>
+              <span className="text-white text-lg font-medium">Menu</span>
               <button 
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="text-gray-400 hover:text-white transition-colors"
@@ -101,50 +100,43 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               className={`block hover:text-terminal-green hover:drop-shadow-[0_0_8px_rgba(34,197,94,0.3)] transition-all duration-300 text-lg ${location.pathname === '/' ? 'text-terminal-green drop-shadow-[0_0_8px_rgba(34,197,94,0.4)]' : 'text-gray-300'}`}
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              {t('nav.home')}
+              index.js
             </Link>
             <Link 
               to="/about" 
               className={`block hover:text-terminal-green hover:drop-shadow-[0_0_8px_rgba(34,197,94,0.3)] transition-all duration-300 text-lg ${location.pathname === '/about' ? 'text-terminal-green drop-shadow-[0_0_8px_rgba(34,197,94,0.4)]' : 'text-gray-300'}`}
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              {t('nav.about')}
+              about.md
             </Link>
             <Link 
               to="/projects" 
               className={`block hover:text-terminal-green hover:drop-shadow-[0_0_8px_rgba(34,197,94,0.3)] transition-all duration-300 text-lg ${location.pathname === '/projects' ? 'text-terminal-green drop-shadow-[0_0_8px_rgba(34,197,94,0.4)]' : 'text-gray-300'}`}
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              {t('nav.projects')}
+              projects.py
             </Link>
             <Link 
               to="/blog" 
               className={`block hover:text-terminal-green hover:drop-shadow-[0_0_8px_rgba(34,197,94,0.3)] transition-all duration-300 text-lg ${location.pathname === '/blog' ? 'text-terminal-green drop-shadow-[0_0_8px_rgba(34,197,94,0.4)]' : 'text-gray-300'}`}
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              {t('nav.blog')}
+              blog.sh
             </Link>
             <Link 
               to="/resume" 
               className={`block hover:text-terminal-green hover:drop-shadow-[0_0_8px_rgba(34,197,94,0.3)] transition-all duration-300 text-lg ${location.pathname === '/resume' ? 'text-terminal-green drop-shadow-[0_0_8px_rgba(34,197,94,0.4)]' : 'text-gray-300'}`}
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              {t('nav.resume')}
+              resume.pdf
             </Link>
-          </div>
-            
-          {/* Dark mode toggle and Language Switcher */}
-          <div className="border-t border-foreground-800">
-            <div className="px-6 pt-4 space-y-4">
-              <button className="flex items-center space-x-3 text-gray-300 hover:text-terminal-green hover:drop-shadow-[0_0_8px_rgba(34,197,94,0.3)] transition-all duration-300 text-lg">
-                <span>🌙</span>
-                <span>{t('common.darkMode')}</span>
-              </button>
-              <div className="flex items-center space-x-3">
-                <LanguageSwitcher />
-                <span className="text-gray-400 text-sm">Language / Bahasa</span>
-              </div>
-            </div>
+            <Link 
+              to="/contact" 
+              className={`block bg-terminal-green/10 text-terminal-green px-4 py-3 rounded-lg border border-terminal-green/30 hover:bg-terminal-green/20 hover:shadow-terminal-green/30 hover:shadow-lg transition-all duration-300 text-lg font-medium text-center ${location.pathname === '/contact' ? 'bg-terminal-green/20 shadow-terminal-green/30 shadow-lg' : ''}`}
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Connect
+            </Link>
           </div>
         </div>
       </div>

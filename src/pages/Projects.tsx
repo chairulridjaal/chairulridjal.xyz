@@ -7,38 +7,41 @@ const Projects: React.FC = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const projects = [
-    {
-      id: 1,
-      title: 'Personal Website',
-      description: 'A modern personal website built with React, TypeScript, and Tailwind CSS. Features AI chatbot integration, Spotify API, and multilingual support.',
-      image: '/assets/images/HerdSphere Logo_ Livestock Management Solution.png',
-      technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'OpenRouter AI'],
-      github: '#',
-      demo: '#',
-      status: 'Active',
-    },
-    {
-      id: 2,
-      title: 'AI Chatbot Integration',
-      description: 'Intelligent chatbot powered by GPT-4o-mini through OpenRouter API. Supports multilingual conversations and provides personalized responses.',
-      image: 'https://via.placeholder.com/400x250/1a1a1a/00FF41?text=AI+Chatbot',
-      technologies: ['OpenRouter API', 'GPT-4o-mini', 'React', 'TypeScript'],
-      github: '#',
-      demo: '#',
-      status: 'Completed',
-    },
-    {
-      id: 3,
-      title: 'Machine Learning Projects',
-      description: 'Collection of ML projects focusing on renewable energy optimization and data analysis. Built with Python and modern ML frameworks.',
-      image: 'https://via.placeholder.com/400x250/1a1a1a/00FF41?text=ML+Projects',
-      technologies: ['Python', 'TensorFlow', 'Pandas', 'Scikit-learn'],
-      github: '#',
-      demo: '#',
-      status: 'In Progress',
-    },
-  ];
+const projects = [
+  {
+    id: 1,
+    title: 'Personal Website',
+    description:
+      'A modern developer portfolio built with React, TypeScript, and Tailwind CSS. Features AI-powered assistant via OpenRouter, dynamic Spotify integration, and multilingual support.',
+    image: 'public/assets/images/personalweb.png',
+    technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'GPT-4o Mini', 'OpenRouter'],
+    github: 'https://github.com/chairulridjaal/chairulridjal.xyz',
+    demo: 'https://chairulridjal.xyz/',
+    status: 'Active',
+  },
+  {
+    id: 2,
+    title: 'HerdSphere – Livestock Management App',
+    description:
+      'A mobile-first livestock and farm management platform built with Firebase. Supports multi-farm access, animal health/event tracking, and scalable architecture for future IoT integration.',
+    image: 'public/assets/images/HerdSphere Logo_ Livestock Management Solution.png',
+    technologies: ['React', 'Vite', 'Firebase', 'TypeScript', 'Tailwind CSS'],
+    github: 'https://github.com/chairulridjaal/HerdSphere', // replace
+    demo: 'https://herdsphere.xyz/',
+    status: 'Completed',
+  },
+  {
+    id: 3,
+    title: 'KalaNusa – Cultural Preservation App',
+    description:
+      'A mobile-first app to preserve Indonesian culture through AI. Features Kala the Lutung, an AI chatbot companion for folklore and traditions, and a Scripture Scanner that transcribes and analyzes artifacts using OCR and AI. Includes gamified user profiles, a contribution tracker, and a growing digital public library.',
+    image: 'public/assets/images/kalanusa.jpg', // replace with your image
+    technologies: ['React Native', 'Supabase', 'Mastra AI', 'OpenAI GPT-4o Mini', 'OCR'],
+    github: 'https://github.com/raihanpka/dramaga-cantieeek-garudahacks', // replace
+    demo: 'https://kalanusa.vercel.app/',
+    status: 'Completed',
+  },
+];
 
   return (
     <Layout>
@@ -167,7 +170,7 @@ const Projects: React.FC = () => {
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="https://github.com/yourusername"
+                href="https://github.com/chairulridjaal"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center bg-terminal-green/10 text-terminal-green px-6 py-3 rounded-xl hover:bg-terminal-green/20 hover:shadow-terminal-green/40 hover:shadow-lg transition-all duration-300 border border-terminal-green/30 hover:border-terminal-green/50 font-medium"
