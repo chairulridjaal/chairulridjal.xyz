@@ -7,11 +7,13 @@ import BlogPost from './pages/BlogPost';
 import AdminBlog from './pages/AdminBlog';
 import Resume from './pages/Resume';
 import Contact from './pages/Contact';
+import { Analytics } from '@vercel/analytics/react';
 
 function App() {
   return (
     <Router>
       <div className="App">
+        <Analytics />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
