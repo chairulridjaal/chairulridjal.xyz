@@ -17,7 +17,7 @@ const BlogPost: React.FC = () => {
   useEffect(() => {
     if (blogPost) {
       // Update page title
-      document.title = `${blogPost.title} | Chairulridjal's Blog`;
+      document.title = `${blogPost.title} | chairulridjal's Blog`;
       
       // Update meta description
       const metaDescription = document.querySelector('meta[name="description"]');

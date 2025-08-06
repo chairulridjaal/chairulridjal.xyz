@@ -19,6 +19,25 @@ const projects = [
     status: 'Active',
   },
   {
+    id: 4,
+    title: 'Invoice Chain Agent – AI & Blockchain for Invoices',
+    description:
+      'An AI-powered system for invoice validation and fraud detection, with secure storage on Internet Computer blockchain. Features OCR, multi-layer checks, and a Fetch.ai uAgent chatbot for real-time queries.',
+    image: '/assets/images/Invoice-Chain-Agent.jpg', // replace with your image
+    technologies: [
+      'Python',
+      'Fetch.ai uAgents',
+      'Internet Computer Protocol (ICP)',
+      'OpenAI GPT-4o',
+      'OCR',
+      'React',
+      'Flask'
+    ],
+    github: 'https://github.com/chairulridjaal/invoice-chain-agent', // replace with correct repo
+    demo: 'https://invoice-chain.vercel.app/', // replace with correct demo URL
+    status: 'Active',
+  },
+  {
     id: 2,
     title: 'HerdSphere – Livestock Management App',
     description:
@@ -54,7 +73,7 @@ const projects = [
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
               </svg>
             </div>
-            <h1 className="text-4xl font-bold text-white mb-4 font-family-jakarta">
+            <h1 className="text-4xl font-bold text-white mb-4 plus-jakarta-sans">
               My Projects
             </h1>
             <p className="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">
@@ -64,18 +83,23 @@ const projects = [
           </div>
 
           {/* Projects Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
             {projects.map((project) => (
               <div
                 key={project.id}
                 className="bg-dark-gray rounded-2xl border border-foreground-800 overflow-hidden hover:border-terminal-green/50 transition-all duration-300 group shadow-lg hover:shadow-terminal-green/20"
               >
                 {/* Project Image */}
-                <div className="relative overflow-hidden">
+                <div className="relative overflow-hidden h-48">
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    onError={(e) => {
+                      if (e.currentTarget.src !== `https://via.placeholder.com/600x300/1a1a1a/00FF41?text=${encodeURIComponent(project.title)}`) {
+                        e.currentTarget.src = `https://via.placeholder.com/600x300/1a1a1a/00FF41?text=${encodeURIComponent(project.title)}`;
+                      }
+                    }}
                   />
                   
                   {/* Status Badge */}
@@ -90,6 +114,9 @@ const projects = [
                       {project.status}
                     </span>
                   </div>
+
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-dark-gray/80 via-transparent to-transparent"></div>
                 </div>
 
                 {/* Project Content */}
@@ -97,31 +124,40 @@ const projects = [
                   {/* Title with Terminal Prompt */}
                   <div className="flex items-center mb-3">
                     <span className="text-terminal-green mr-2 font-mono text-sm">$</span>
-                    <h3 className="text-xl font-semibold text-white font-family-jakarta group-hover:text-terminal-green/90 transition-colors">
+                    <h3 className="text-xl font-semibold text-white plus-jakarta-sans group-hover:text-terminal-green/90 transition-colors">
                       {project.title}
                     </h3>
                   </div>
                   
-                  <p className="text-gray-300 mb-4 group-hover:text-gray-200 transition-colors leading-relaxed text-sm">
+                  <p className="text-gray-300 mb-4 group-hover:text-gray-200 transition-colors leading-relaxed text-sm line-clamp-3">
                     {project.description}
                   </p>
                   
                   {/* Technologies */}
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {project.technologies.map((tech) => (
-                      <span
-                        key={tech}
-                        className="bg-terminal-green/10 text-terminal-green px-3 py-1 rounded-lg text-xs border border-terminal-green/30 group-hover:bg-terminal-green/20 group-hover:shadow-terminal-green/30 group-hover:shadow-sm transition-all font-mono"
-                      >
-                        {tech}
-                      </span>
-                    ))}
+                  <div className="mb-6">
+                    <div className="flex flex-wrap gap-2">
+                      {project.technologies.slice(0, 4).map((tech) => (
+                        <span
+                          key={tech}
+                          className="bg-terminal-green/10 text-terminal-green px-2 py-1 rounded-lg text-xs border border-terminal-green/30 group-hover:bg-terminal-green/20 transition-colors font-mono"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                      {project.technologies.length > 4 && (
+                        <span className="text-gray-400 text-xs py-1 px-2">
+                          +{project.technologies.length - 4} more
+                        </span>
+                      )}
+                    </div>
                   </div>
                   
                   {/* Action Buttons */}
-                  <div className="flex gap-3">
+                  <div className="flex gap-3 pt-3 border-t border-gray-700/50">
                     <a
                       href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="flex-1 bg-foreground-800/50 text-gray-300 px-4 py-2.5 rounded-xl hover:bg-terminal-green/10 hover:text-terminal-green hover:border-terminal-green/30 transition-all duration-300 text-sm text-center border border-foreground-700 hover:shadow-terminal-green/20 hover:shadow-lg font-medium"
                     >
                       <span className="flex items-center justify-center">
@@ -133,6 +169,8 @@ const projects = [
                     </a>
                     <a
                       href={project.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="flex-1 bg-terminal-green/10 text-terminal-green px-4 py-2.5 rounded-xl hover:bg-terminal-green/20 hover:shadow-terminal-green/40 hover:shadow-lg transition-all duration-300 text-sm text-center border border-terminal-green/30 hover:border-terminal-green/50 font-medium"
                     >
                       <span className="flex items-center justify-center">
@@ -159,7 +197,7 @@ const projects = [
               </div>
             </div>
             
-            <h2 className="text-2xl font-bold text-white mb-4 font-family-jakarta group-hover:text-terminal-green/90 transition-colors">
+            <h2 className="text-2xl font-bold text-white mb-4 plus-jakarta-sans group-hover:text-terminal-green/90 transition-colors">
               More Projects in Development
             </h2>
             <p className="text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed">
